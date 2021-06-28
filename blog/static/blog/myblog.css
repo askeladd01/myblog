@@ -1,0 +1,75 @@
+ul.blog_infos{
+    list-style-type: none;
+}
+ul.blog_infos li{
+    display: inline-block;
+    margin-right: 2em;
+}
+div.liked {
+    color:#337ab7;
+    cursor: pointer;
+    display: inline-block;
+    margin-left: 800px;
+}
+div.liked .active{
+    color:red;
+}
+div.like {
+    color:#337ab7;
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 10px;
+}
+div.like .active{
+    color:red;
+}
+.django-ckeditor-widget{
+    width: 100%;
+}
+div.blog_content{
+    text-indent: 2em;
+    margin-bottom: 2em;
+}
+div#reply_content_container{
+    display: none;
+}
+div#reply_content{
+    margin-left: 10px;
+}
+.comment>div.text-muted{
+    font-size:5px;
+}
+.comment>div.text-muted>a{
+    margin-left:25px;
+    font-size:5px;
+}
+div.reply{
+    margin-left: 60px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.reply>div.text-muted{
+    font-size:5px;
+}
+.reply>div.text-muted>a{
+    margin-left:25px;
+    font-size:5px;
+}
+div.comment_time {
+    display: inline-block;
+    margin-right: 10px;
+}
+div.reply>a {
+    font-size: 12px;
+}
+div.comment {
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: rgb(229,233,239);
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+
+div.comment>a {
+    font-size: 12px;
+}

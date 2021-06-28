@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    个人资料
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                {% if user.is_authenticated %}
+                    <h3>{{ user.username }}</h3>
+                    <ul>
+                        <li>昵称：{{ user.get_nickname_or_username }}
+                            <a href="{% url 'change_nickname' %}?from={{ request.get_full_path }}">修改昵称</a>
+                        </li>
+                        <li>
+                            邮箱：{{ user.email }}
+                            <a href="{% url 'bind_email' %}?from={{ request.get_full_path }}">换绑邮箱</a>
+                        </li>
+                        <li>
+                            <p>上一次登录的时间：{{ user.last_login|date:'Y-m-d H:i:s' }}</p>
+                        </li>
+                        <li>
+                            <a href="{% url 'change_password' %}">修改密码</a>
+                        </li>
+                    </ul>
+                {% else %}
+                    <h4>未登录，跳转回首页</h4>
+                    <script type="text/javascript">
+                    window.location.href = '/';
+                    </script>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

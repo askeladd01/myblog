@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    我的网站|注册
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+            {% if not user.is_authenticated %}
+                <div class="panel panel-info">
+              <div class="panel-heading"><h3 class="panel-title">注册</h3></div>
+              <div class="panel-body">
+                <form action="" method="post" novalidate>
+                    {% csrf_token %}
+                    {% for foo in reg_obj %}
+                        <p>{{ foo.label }}{{ foo }}</p>
+                        <span class="text-danger">{{ foo.errors.as_text }}</span>
+                    {% endfor %}
+                    <p id="tips" class="text-danger">{{ reg_obj.non_field_errors }}</p>
+                     <button id="send_code" class="btn btn-primary pull-left" type="button">发送验证码</button>
+                    <input type="submit" value="注册" class="btn btn-info pull-right">
+                </form>
+              </div>
+            </div>
+            {% else %}
+                <h4>已登录，跳转回首页</h4>
+                <script type="text/javascript">
+                window.location.href = '/';
+                </script>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block script_extend %}
+    <script type="text/javascript">
+        $('#send_code').click(function (){
+            let email = $('#id_email').val();
+            if(email === ''){
+                $('#tips').text('* 邮箱不能为空')
+                return false;
+            }
+            $.ajax({
+                url: '{% url 'send_email_code' %}',
+                type: 'get',
+                data:{'email':email, 'send_for': 'register_code'},
+                cache:false,
+                success: function (data) {
+                    if(data['status']==='ERROR_time'){
+                        alert('不能重复发送')
+                    }else {
+                        alert('发送成功')
+                    }
+                }
+            });
+            $(this).addClass('disabled');
+            $(this).attr('disabled', true);
+            let time = 30;
+            $(this).text(time+'s');
+            let interval = setInterval(() => {
+                if(time <= 0){
+                    clearInterval(interval);
+                    $(this).removeClass('disabled');
+                    $(this).attr('disabled', false);
+                    $(this).text('发送验证码');
+                    return false;
+                }
+                time --;
+                $(this).text(time+'s');
+            }, 1000)
+
+        });
+
+    </script>
+{% endblock %}
