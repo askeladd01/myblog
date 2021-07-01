@@ -67,7 +67,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': '/path/to/django/debug.log',
+            'filename': '/home/myblog_debug.log',
         },
         'mail_admins': {
                     'level': 'ERROR',
